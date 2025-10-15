@@ -3,6 +3,7 @@
 #include <string>
 #include <stdexcept>
 #include "verifica_tag.h"
+#include "resolve_matriz.h"
 
 using namespace std;
 
