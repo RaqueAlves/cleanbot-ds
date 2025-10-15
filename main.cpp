@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include "verifica_tag.h"
 
 using namespace std;
 
@@ -74,59 +75,39 @@ class Cenario {
 };
 
 
-/**********************
-    FUNÇÃO PRINCIPAL
-***********************/
 int main() {
 
     string filename;
 
-    std::cin >> filename;  // nome do arquivo de entrada 
-                           // (no 'executar': escrever pelo teclado;
-                           //  no 'avaliar' : nome é passado pelos testes)
+    std::cin >> filename;
 
-    // Abertura do arquivo
+    /*Abertura do arquivo*/ 
     ifstream filexml(filename);
     if (!filexml.is_open()) {
         cerr << "Erro ao abrir o arquivo " << filename << endl;
         throw runtime_error("Erro no arquivo XML");
     }
 
-    // Leitura do XML completo para 'texto'
+    /*Leitura do XML completo para 'texto'*/
     string texto;
     char character;
     while (filexml.get(character)) {
         texto += character;
+    }    
+    filexml.close();
+
+    /**
+     * PARTE 1 DO PROJETO: VERIFICAÇÃO DAS TAGS
+    */
+    try {
+        verificaTags(texto);
+    } catch (const exception& e) {
+        cout << "erro" << endl;
+        return 0;
     }
 
-
-    // ----------------------------
-    // Sugestão de código para a PARTE 2 do projeto
-
-    // Exemplo de leitura do primeiro cenário - REMOVER ESTAS SAÍDAS DE TELA NA VERSÃO FINAL
-    Cenario c1(texto, 0);
-
-    cout << "nome   : " << c1.nome << endl;
-    cout << "altura : " << c1.altura << endl;
-    cout << "largura: " << c1.largura << endl;
-    cout << "x      : " << c1.x << endl;
-    cout << "y      : " << c1.y << endl;
-    cout << "matriz : " << c1.matriz << endl << endl;
-
-    // Exemplo de leitura do segundo cenário (a partir do índice final de c1) - REMOVER ESTAS SAÍDAS DE TELA NA VERSÃO FINAL
-    Cenario c2(texto, c1.indice_final);
-
-    cout << "nome   : " << c2.nome << endl;
-    cout << "altura : " << c2.altura << endl;
-    cout << "largura: " << c2.largura << endl;
-    cout << "x      : " << c2.x << endl;
-    cout << "y      : " << c2.y << endl;
-    cout << "matriz : " << c2.matriz << endl << endl;
-
-    /*
-     
-       COLOQUE SEU CÓDIGO AQUI
-    
+    /**
+     * PARTE 2 DO PROJETO: DETERMINAÇÃO DA ÁREA DA MATRI
     */
 
     return 0;

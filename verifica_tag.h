@@ -6,7 +6,6 @@ void verificaTags(const std::string& trecho_programa) {
     structures::ArrayStack<std::string> pilha(1500);
 
     try {
-        std::cout << "Iniciando a verificação de tags" << std::endl;
         for (std::size_t i = 0; i < trecho_programa.length(); i++) {
             std::string tag;
 
@@ -44,6 +43,4 @@ void verificaTags(const std::string& trecho_programa) {
     } catch (const std::runtime_error& e) {
         std::cerr << e.what() << std::endl;
     }
-
-    std::cout << "Arquivo validado com sucesso!" << std::endl;
 }
